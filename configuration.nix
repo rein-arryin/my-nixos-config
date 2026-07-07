@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, nvim, ... }:
 
 {
   imports =
@@ -8,7 +8,8 @@
 
   boot = {
 
-	extraModprobeConfig = ''
+	kernelParams = [ "quiet" "splash" "mem_sleep_default=deep" ];
+        extraModprobeConfig = ''
   	options bluetooth disable_ertm=Y
 	'';
 
@@ -24,7 +25,24 @@
 	  enable = true;
 	  efiSupport = true;
 	  device = "nodev";
-	  useOSProber = true;
+	  useOSProber = false;
+          splashImage = ./shark.png;
+          extraEntries = ''
+            menuentry "Windows" {
+              search --set=root --fs-uuid E869-3F4C
+              chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+              }
+            menuentry "Linux Mint" {
+              search --set=root --fs-uuid fef8ab95-1fc6-49a5-8ef8-e09c5d9b008e
+              linux /boot/vmlinuz-6.17.0-29-generic root=UUID=fef8ab95-1fc6-49a5-8ef8-e09c5d9b008e rw quiet splash
+              initrd /boot/initrd.img-6.17.0-29-generic
+              }
+            menuentry "Arch Linux" {
+              search --set=root --fs-uuid 4058-F3D7
+              linux /vmlinuz-linux-zen root=UUID=615499bb-727c-4465-ac66-9e0bf6faa0b7 rw quiet splash
+              initrd /initramfs-linux-zen.img
+              }
+          '';  
         };
       };
     };
@@ -51,16 +69,18 @@
   time.timeZone = "Asia/Jakarta";
 
   services = {  
-	displayManager.sddm = {
-	  enable = true;
-	  wayland.enable = true;
-  	};
-
 	 pipewire = {
 	   enable = true;
 	   pulse.enable = true;
 	   wireplumber.enable = true;
-	};
+	 };
+        
+          xserver.desktopManager = {
+            cinnamon.enable = true;
+          };  
+
+        gnome.gnome-keyring.enable = lib.mkForce false;
+        logind.settings.Login.HandleLidSwitch = "suspend";
 
 	power-profiles-daemon.enable = true;
 	gvfs.enable = true;
@@ -69,7 +89,17 @@
 	upower.enable = true;
   };
 
-
+  virtualisation = {
+    waydroid.enable = true;
+    waydroid.package = pkgs.waydroid-nftables;
+  };  
+  
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+   };              
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -84,7 +114,6 @@
    };
 
   programs.zsh.enable = true;
-  programs.niri.enable = true;
   programs.waybar.enable = false;
   programs.kdeconnect.enable = true;
   programs.xfconf.enable = true;
@@ -102,12 +131,15 @@
   environment.systemPackages = with pkgs; [
 
      #Text Editor
-     vim 
+     vim
+     nvim
      
      # Terminal
      alacritty
+     ghostty
 
      # Terminal Utils
+     blueman
      efibootmgr
      fastfetch
      wget
@@ -123,9 +155,12 @@
      imagemagick
      cmake
      gnumake
+     xev           
 
      # Audio
      pavucontrol
+     pulseaudio           
+     playerctl           
 
      # Browser
      firefox
@@ -143,12 +178,14 @@
      xwayland
      wl-clipboard
      polkit_gnome
+     wlr-randr
 
      # Wallpaper
      awww
 
      # Cursor Theme
-     bibata-cursors     
+     bibata-cursors
+     hackneyed
 
      # Unstable
    ];
@@ -158,9 +195,11 @@
   };
 
   environment.shellAliases = {
+     shutdown = "shutdown now";
      v = "nvim";
      sv = "sudo nvim";
      nrs = "sudo nixos-rebuild switch";
+     nrs-flake = "sudo nixos-rebuild switch --flake .";
      hms = "home-manager switch";
      svn = "sudo nvim /etc/nixos/configuration.nix";
      restart = "systemctl restart display-manager";

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
 
@@ -6,16 +6,24 @@ imports = [
         inputs.qylock.nixosModules.default
 ];
 
-services.displayManager.sddm  = {
-  enable = true;
-  wayland.enable = true;
+services.displayManager.sddm = {
+    enable = true;
+    wayland = {
+        enable = true;
+        compositor = "kwin";
+    };  
+
+  settings.Theme = {
+    CursorTheme = "Hackneyed";
+    CursorSize = 24;
+  };  
 };  
 
 programs.qylock = {
   enable = true;
-  theme = "nier-automata";
-  sddm.enable = true;
-  quickshell.enable = true;
+  theme = "windows_7";
+  #sddm.enable = true;
+  #quickshell.enable = true;
 
    themeOptions = {
      terraria.backgroundMode = "time";
