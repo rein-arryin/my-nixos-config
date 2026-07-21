@@ -34,7 +34,7 @@
 
     nvim = (nvf.lib.neovimConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
-      modules = [ ./nvf-configuration.nix ];
+      modules = [ ./nix/nvf.nix ];
     }).neovim;
   in
 
@@ -57,10 +57,10 @@
       
       modules = [ 
 	./configuration.nix 
-	./mangowc.nix
-	./noctalia.nix
-	./spotify.nix
-        ./sddm.nix
+	./nix/mangowc.nix
+	./nix/noctalia.nix
+	./nix/spotify.nix
+        ./nix/sddm.nix
         nvf.nixosModules.default
       ];
     };
