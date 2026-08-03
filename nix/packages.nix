@@ -1,17 +1,17 @@
 { config, lib, pkgs, pkgs-unstable, inputs, nvim, ... }:
 
 {
-# Packages
-  programs.zsh.enable = true;
-  programs.kdeconnect.enable = true;
-  programs.xfconf.enable = true;
-  programs.dconf.enable = true;
+  # Packages
+  programs = {
+    zsh.enable = true;
+    kdeconnect.enable = true;
+    xfconf.enable = true;
+    dconf.enable = true;
+    steam.enable = true; # Steam
+    virt-manager.enable = true; #KVM
+  };  
 
-  # Steam
-  programs.steam = {
-    enable = true;
-  };
-
+  # Thunar
   programs.thunar = {
     enable = true;
     plugins = with pkgs; [
@@ -20,8 +20,10 @@
     ];
   };
 
-  security.polkit.enable = true;
-  security.audit.enable = true;
+  security = {
+    polkit.enable = true;
+    audit.enable = true;
+  };  
 
   environment.systemPackages = with pkgs; [
 
@@ -39,7 +41,6 @@
      fastfetch
      wget
      zip
-     unzip
      exfatprogs
      android-tools
      gcc
@@ -87,6 +88,14 @@
      # Minecraft
      temurin-bin-21
      steam-run
+
+     # Thunar
+     gnome.gvfs
+     xarchiver
+     unzip
+     unrar
+     p7zip
+     gnome-themes-extra
    ];
 }
 

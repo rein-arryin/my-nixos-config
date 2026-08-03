@@ -24,12 +24,14 @@
   virtualisation = {
     waydroid.enable = true;
     waydroid.package = pkgs.waydroid-nftables;
+    libvirtd.enable = true;
   };
 
   xdg.portal = {
     enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
+      pkgs.kdePackages.xdg-desktop-portal-kde
     ];
    };
 

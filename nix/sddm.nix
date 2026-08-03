@@ -1,36 +1,46 @@
-{ pkgs, inputs, ... }:
+{ inputs, ... }:
 
 {
 
-imports = [
-        inputs.qylock.nixosModules.default
-];
+  imports = [
+    inputs.qylock.nixosModules.default
+    inputs.silentSDDM.nixosModules.default
+  ];
 
-services.displayManager.sddm = {
-    enable = true;
-    wayland = {
-        enable = true;
-        compositor = "kwin";
-    };  
+  services.displayManager.sddm = {
+      enable = true;
+      wayland = {
+          enable = true;
+          compositor = "kwin";
+      };  
 
   settings.Theme = {
     CursorTheme = "Hackneyed";
     CursorSize = 24;
+    };  
   };  
-};  
 
-programs.qylock = {
-  enable = true;
-  theme = "windows_7";
-  #sddm.enable = true;
-  #quickshell.enable = true;
+  # Theme
+  
+  # SilentSDDM
+  programs.silentSDDM = {
+    enable = true;
+    theme = "default";
+  };
 
-   themeOptions = {
-     terraria.backgroundMode = "time";
-     Genshin.backgroundMode = "time";
-     clockwork.orbital = { themeMode = "dark"; enableWindup = true; };
-     osu.gameMode = "menu";
-   };
- };
+  # Qylock
+  programs.qylock = {
+    enable = false;
+    theme = "windows_7";
+    #sddm.enable = true;
+    #quickshell.enable = true;
+
+     themeOptions = {
+       terraria.backgroundMode = "time";
+       Genshin.backgroundMode = "time";
+       clockwork.orbital = { themeMode = "dark"; enableWindup = true; };
+       osu.gameMode = "menu";
+     };
+  };
 } 
 

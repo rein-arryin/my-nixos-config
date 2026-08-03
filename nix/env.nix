@@ -6,17 +6,22 @@
      NIXOS_OZONE_WL = "1";
   };
 
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+    QT_QPA_PLATFORM = "wayland;xcb";
+  };  
+
   environment.shellAliases = {
      shutdown = "shutdown now";
      v = "nvim";
      sv = "sudo nvim";
      nrs = "sudo nixos-rebuild switch";
      nrs-flake = "sudo nixos-rebuild switch --flake .";
-     nrs-upgrade = "sudo nixos-rebuild switch ---upgrade";
+     nfs = "sudo nix flake update";
+     nfu = "sudo nix flake update nixpkgs nixpkgs-unstable";
      hms = "home-manager switch";
      svn = "sudo nvim /etc/nixos";
      restart = "systemctl restart display-manager";
-     cat = "bat";
    };
 
   environment.interactiveShellInit = ''
@@ -48,6 +53,7 @@
      kwalletmanager
      kde-gtk-config
      polkit-kde-agent-1
+     qrca
   ];
 
 }

@@ -1,11 +1,12 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
 
   boot = {
 
         kernelParams = [ "quiet" "splash" "mem_sleep_default=deep" ];
-        #kernelParams = [ "splash" "mem_sleep_default=deep" ];
+        kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest; # Latest Cachyos Kernel
+        # kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; # Cachyos Kernel BORE
         extraModprobeConfig = ''
   	options bluetooth disable_ertm=Y
 	'';
