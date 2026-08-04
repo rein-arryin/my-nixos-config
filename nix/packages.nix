@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, inputs, nvim, ... }:
+{ config, pkgs, pkgs-unstable, inputs, nvim, ... }:
 
 {
   # Packages
@@ -20,10 +20,6 @@
     ];
   };
 
-  security = {
-    polkit.enable = true;
-    audit.enable = true;
-  };  
 
   environment.systemPackages = with pkgs; [
 
