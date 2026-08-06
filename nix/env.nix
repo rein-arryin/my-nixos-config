@@ -7,6 +7,7 @@
   };
 
   environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
     LIBVA_DRIVER_NAME = "iHD";
     QT_QPA_PLATFORM = "wayland;xcb";
   };  
@@ -14,13 +15,13 @@
   environment.shellAliases = {
      shutdown = "shutdown now";
      v = "nvim";
-     sv = "sudo nvim";
-     nrs = "sudo nixos-rebuild switch";
-     nrs-flake = "sudo nixos-rebuild switch --flake .";
-     nfs = "sudo nix flake update";
-     nfu = "sudo nix flake update nixpkgs nixpkgs-unstable";
+     sv = "doas nvim";
+     nrs = "doas nixos-rebuild switch";
+     nrs-flake = "doas nixos-rebuild switch --flake .";
+     nfs = "doas nix flake update";
+     nfu = "doas nix flake update nixpkgs nixpkgs-unstable";
      hms = "home-manager switch";
-     svn = "sudo nvim /etc/nixos";
+     svn = "doas nvim /etc/nixos";
      restart = "systemctl restart display-manager";
    };
 

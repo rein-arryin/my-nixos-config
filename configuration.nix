@@ -12,6 +12,8 @@
       ./nix/services.nix
       ./nix/user.nix
       ./nix/hardware.nix
+      ./nix/security.nix
+      ./nix/fstab.nix
     ];
 
   time.timeZone = "Asia/Jakarta";
@@ -37,8 +39,5 @@
     config.allowUnfree = true;
   };  
 
-
-
   system.stateVersion = "25.11";
-
 }

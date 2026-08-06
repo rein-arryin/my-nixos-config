@@ -5,6 +5,7 @@
   services = {
 	 pipewire = {
 	   enable = true;
+           alsa.enable = true;
 	   pulse.enable = true;
 	   wireplumber.enable = true;
 	 };
@@ -29,10 +30,11 @@
 
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
     extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
       pkgs.kdePackages.xdg-desktop-portal-kde
     ];
-   };
-
+  };  
 }
