@@ -28,6 +28,7 @@
     
     # SDDM THEME
     qylock.url = "github:Darkkal44/qylock";
+
     silentSDDM = {
       url = "github:uiriansan/SilentSDDM";
       inputs.nixpkgs.follows = "nixpkgs";

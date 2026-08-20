@@ -3,7 +3,7 @@
 { 
    users.users.neo = {
      isNormalUser = true;
-     shell = pkgs.zsh;
+     shell = pkgs.bashInteractive;
      extraGroups = [
      "wheel"
      "adbusers"

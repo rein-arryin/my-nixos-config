@@ -5,11 +5,12 @@
   boot = {
 
         kernelParams = [ "quiet" "splash" "mem_sleep_default=deep" ];
-        kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest; # Latest Cachyos Kernel
+        kernelPackages = pkgs.linuxPackages_latest; 
+        #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest; # Latest Cachyos Kernel
         # kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore; # Cachyos Kernel BORE
-        extraModprobeConfig = ''
-  	options bluetooth disable_ertm=Y
-	'';
+        #extraModprobeConfig = ''
+        #options bluetooth disable_ertm=Y
+        #'';
 
     loader = {
   	timeout = 15;
@@ -29,11 +30,6 @@
             menuentry "Windows" {
               search --set=root --fs-uuid E869-3F4C
               chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-              }
-            menuentry "Arch Linux" {
-              search --set=root --fs-uuid 4058-F3D7
-              linux /vmlinuz-linux-zen root=UUID=615499bb-727c-4465-ac66-9e0bf6faa0b7 rw quiet splash
-              initrd /initramfs-linux-zen.img
               }
           '';
         };

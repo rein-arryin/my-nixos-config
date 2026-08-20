@@ -10,16 +10,25 @@
 	   wireplumber.enable = true;
 	 };
 
-         desktopManager.plasma6.enable = true;
+        # X11
+        xserver.enable = true;
+
+        # dwm
+        xserver.windowManager.dwm.enable = true;
 
         gnome.gnome-keyring.enable = lib.mkForce false;
         logind.settings.Login.HandleLidSwitch = "suspend";
+
+        teamviewer.enable = true;
+
+        flatpak.enable = true;
 
 	power-profiles-daemon.enable = true;
 	gvfs.enable = true;
 	udisks2.enable = true;
 	tumbler.enable = true;
 	upower.enable = true;
+        mpd.enable = true;
   };
 
   virtualisation = {
@@ -32,9 +41,7 @@
     enable = true;
     wlr.enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
-      pkgs.kdePackages.xdg-desktop-portal-kde
     ];
   };  
 }

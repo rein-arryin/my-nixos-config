@@ -13,7 +13,7 @@
       ./nix/user.nix
       ./nix/hardware.nix
       ./nix/security.nix
-      ./nix/fstab.nix
+      ./nix/plasma.nix
     ];
 
   time.timeZone = "Asia/Jakarta";

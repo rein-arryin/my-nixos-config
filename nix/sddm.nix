@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 
 {
 
@@ -10,7 +10,7 @@
   services.displayManager.sddm = {
       enable = true;
       wayland = {
-          enable = true;
+          enable = lib.mkForce true;
           compositor = "kwin";
       };  
 

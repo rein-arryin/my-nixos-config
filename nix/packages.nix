@@ -5,15 +5,13 @@
   programs = {
     zsh.enable = true;
     kdeconnect.enable = true;
-    xfconf.enable = true;
-    dconf.enable = true;
     steam.enable = true; # Steam
     virt-manager.enable = true; #KVM
   };  
 
   # Thunar
   programs.thunar = {
-    enable = true;
+    enable = false;
     plugins = with pkgs; [
       thunar-archive-plugin
       thunar-volman
@@ -41,10 +39,6 @@
      android-tools
      gcc
      gdb
-     grim
-     swappy
-     slurp
-     imagemagick
      cmake
      gnumake
      bat
@@ -52,7 +46,6 @@
      # Audio
      pavucontrol
      pulseaudio
-     playerctl
 
      # Browser
      firefox
@@ -66,7 +59,6 @@
      git
      scrcpy
      swaybg
-     xwayland-satellite
      xwayland
      wl-clipboard
      polkit_gnome
@@ -87,7 +79,6 @@
 
      # Thunar
      gnome.gvfs
-     xarchiver
      unzip
      unrar
      p7zip
