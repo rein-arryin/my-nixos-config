@@ -3,7 +3,6 @@
 {
   # Packages
   programs = {
-    zsh.enable = true;
     kdeconnect.enable = true;
     steam.enable = true; # Steam
     virt-manager.enable = true; #KVM
